@@ -46,6 +46,9 @@ syn match  oocNoInterpolation	      "\\#{"		      display contained
 syn match  oocNoInterpolation	      "\\#\%(\$\|@@\=\)\w\+"  display contained
 syn match  oocNoInterpolation	      "\\#\$\W"		      display contained
 
+syn match  oocClosureParameter	  "\%(\h\|[^\x00-\x7F]\)\%(\w\|[^\x00-\x7F]\)*" contained
+syn region oocClosureParameterList start="(\(\s\|\t\|\n\)*\%(\%(\|{\)\s*\)\@<=|" end="|" oneline display contains=oocClosureParameter
+
 syn match oocEscapedChar display contained "\\\([\\\"\'anrbtfv]\|\o\{1,3}\|x\x\{1,2}\|u\x\{1,4}\)"
 syn region oocString start=+L\="+ skip=+\\\\\|\\"+ end=+"+ contains=oocEscapedChar,oocInterpolation,oocNoInterpolation,@Spell
 
@@ -100,5 +103,6 @@ hi def link oocFloat Float
 hi def link oocSuffix Identifier
 hi def link oocPreproc Preproc
 hi def link oocScopeDecl StorageClass
+hi def link oocClosureParameter Identifier
 
 let b:current_syntax = "ooc"
